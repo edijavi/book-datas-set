@@ -1,0 +1,23 @@
+{
+  "name": "books-data-set",
+  "version": "1.0.0",
+  "description": "Simple data set  application NodeJS Express ",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edijavi/book-datas-set.git"
+  },
+  "author": "Edison Lamar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edijavi/book-datas-set/issues"
+  },
+  "homepage": "https://github.com/edijavi/book-datas-set#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
+  }
+}
