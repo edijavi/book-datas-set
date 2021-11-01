@@ -1,9 +1,13 @@
-const { application } = require('express');
 const express = require('express');
 const path = require('path');
 
+
+
+
 //Init app
 const app = express();
+
+let Book = require('./models/book');
 
 //Load View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -11,30 +15,19 @@ app.set('view engine', 'pug');
 
 //Home Route
 app.get('/', function(req, res){
-    let books = [
-        {
-            id:1,
-            title:'el book',
-            author:'Brad Th',
-            score:'5.0'
-        },
-        {
-            id:2,
-            title:'el book',
-            author:'Brad h',
-            score:'4.0'
-        },
-        {
-            id:3,
-            title:'el book',
-            author:'Brad D',
-            score:'3.0'
+    Book.find({}, function(err, books){
+        if (err) {
+            console.log(err);
+        } else{
+            res.render('index', {
+                title:'Books',
+                books: books
+            });
         }
-    ]
-    res.render('index', {
-        title:'Books',
-        books: books
+        
+
     });
+    
 });
 
 //Delete Route
