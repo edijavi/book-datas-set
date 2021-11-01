@@ -1,9 +1,7 @@
-var Airtable = require('airtable');
-var base = new Airtable().base('apphV0JKV9WZUMoFS');
-
+let mongoose = require('mongoose');
 
 //Book Schema
-let bookSchema = base.table({
+let bookSchema = mongoose.Schema({
     "bookID": {
         type: String,
         required: true
@@ -38,4 +36,4 @@ let bookSchema = base.table({
     }
 });
 
-let Book = module.exports = base.model('Book', bookSchema)
+let Book = module.exports = mongoose.model('Book', bookSchema)

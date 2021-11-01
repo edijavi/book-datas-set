@@ -1,8 +1,19 @@
 const express = require('express');
 const path = require('path');
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/bookstore');
+let db = mongoose.connection;
 
+//Check Connection
+db.once('open',function(){
+    console.log('Connected to MongoDB');    
+});
 
+//Check DB errors
+db.on('error', function(err){
+    console.log(err); 
+});
 
 //Init app
 const app = express();
