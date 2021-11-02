@@ -1,17 +1,18 @@
 // Import required module csvtojson and mongodb packages
 const csvtojson = require('csvtojson');
-const mongodb = require('mongodb');
-var url = 'mongodb://localhost:27017/bookstore';
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/bookstore');
+let db = mongoose.connection;
 
-var dbConn;
-mongodb.MongoClient.connect(url, {
-    useUnifiedTopology: true,
 
-}).then((client) => {
-    console.log('DB Connected!');
-    dbConn = client.db();
-}).catch(err => {
-    console.log('DB Connection Error: ${err.message}');
+//Check Connection
+db.once('open',function(){
+    console.log('Connected to MongoDB');    
+});
+
+//Check DB errors
+db.on('error', function(err){
+    console.log(err); 
 });
 
 // CSV file name
@@ -21,7 +22,6 @@ csvtojson().fromFile(fileName).then(source => {
     // Fetching the all data from each row
     for (var i = 0; i < source.length; i++) {
          var oneRow = {
-           bookID:source[i]["bookID"],
            title: source[i]["title"],
            authors: source[i]["authors"],
            average_rating: source[i]["average_rating"],
@@ -34,7 +34,7 @@ csvtojson().fromFile(fileName).then(source => {
      }
      //inserting into the table “employees”
      var collectionName = 'books';
-     var collection = dbConn.collection(collectionName);
+     var collection = db.collection(collectionName);
      collection.insertMany(arrayToInsert, (err, result) => {
          if (err) console.log(err);
          if(result){

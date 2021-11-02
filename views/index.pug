@@ -1,7 +1,38 @@
 extends layout
 
 block content 
-    h1 #{title}  
-    ul 
-        each book, i in books
-            li #{book.title}
+    h1.text-6xl.font-normal.leading-normal.mt-0.mb-2.text-pink-800.flex.justify-center #{title}  
+    table.min-w-full
+        thead
+          tr
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider
+              | Title
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider
+              | Author
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider
+              | Rate
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider
+              | ISBN
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50.text-left.text-xs.leading-4.font-medium.text-gray-500.uppercase.tracking-wider
+              | Languague
+            th.px-6.py-3.border-b.border-gray-200.bg-gray-50
+        tbody.bg-white
+        each book in books
+          tr
+            td.px-6.py-4.whitespace-no-wrap.border-b.border-gray-200
+              .flex.items-center
+                .flex-shrink-0.h-10.w-10
+                  img.h-10.w-10.rounded-md(src='https://cdn.pixabay.com/photo/2017/01/31/00/09/book-2022464_960_720.png' alt='')
+                .ml-4
+                  .text-sm.leading-5.font-medium.text-gray-900 #{book.title}
+                  .text-sm.leading-5.text-gray-500 #{book.publisher}
+                  .text-sm.leading-5.text-gray-500 #{book.publication_date}
+            td.px-6.py-4.whitespace-no-wrap.border-b.border-gray-200
+              .text-sm.leading-5.text-gray-900 #{book.authors.substring(0, 20) + "..."}
+            td.px-6.py-4.whitespace-no-wrap.border-b.border-gray-200
+              span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-green-100.text-green-800 #{book.average_rating}
+            td.px-6.py-4.whitespace-no-wrap.border-b.border-gray-200.text-sm.leading-5.text-gray-500 #{book.isbn}
+            td.px-6.py-4.whitespace-no-wrap.border-b.border-gray-200.text-sm.leading-5.text-gray-500 #{book.language_code}
+            td.px-6.py-4.whitespace-no-wrap.text-right.border-b.border-gray-200.text-sm.leading-5.font-medium
+              a.text-indigo-600.delete-book(href='#', data-id=book._id class='hover:text-indigo-900 focus:outline-none focus:underline') Delete
+

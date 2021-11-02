@@ -18,11 +18,15 @@ db.on('error', function(err){
 //Init app
 const app = express();
 
+//Bring the models
 let Book = require('./models/book');
 
 //Load View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// Set Public Folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Home Route
 app.get('/', function(req, res){
@@ -31,20 +35,22 @@ app.get('/', function(req, res){
             console.log(err);
         } else{
             res.render('index', {
-                title:'Books',
+                title:'Bookshop - Aarhus',
                 books: books
             });
-        }
-        
-
-    });
-    
+        }      
+    });    
 });
 
 //Delete Route
-app.get('/books/delete', function(req, res){
-    res.render('delete_book', {
-        title:'Delete Book'
+app.delete('/books/:id', function(req, res){
+    let query = {_id:req.params.id}
+
+    Book.remove(query, function(err){
+        if(err){
+            console.log(err);            
+        }
+        res.send('Success')
     });
 });
 
