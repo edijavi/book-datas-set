@@ -1,6 +1,6 @@
 # Books dataset
 
-Foobar is a Python library for dealing with word pluralization.
+Small web app by server side.
 
 ## Installation
 
