@@ -11,6 +11,12 @@ npm install
 ```
 Load the data to MongoDB locally from a csv file collected from [kaggle](https://www.kaggle.com/jealousleopard/goodreadsbooks)
 ```bash
+mongo
+use bookstore
+db.createCollection('books')
+Ctrl+C
+```
+```bash
 node fixtures/fixtures.js
 ```
 Run NodeJS server [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)
